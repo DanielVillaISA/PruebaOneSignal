@@ -4,24 +4,23 @@
   <meta charset="UTF-8">
   <title>Prueba OneSignal</title>
 </head>
+
 <body style="font-family: Arial; text-align:center; margin-top: 50px;">
 
-  <h1>🔔 Prueba de Notificaciones</h1>
-  <p>Haz clic abajo para activar notificaciones</p>
-
+  <h1> Prueba de Notificaciones</h1>
   <button onclick="suscribirse()" style="padding:10px 20px; font-size:16px;">
     Activar notificaciones
   </button>
 
-  <!-- OneSignal SDK CORRECTO -->
+  <!-- SCRIPT CORRECTO -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"></script>
 
   <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
-    
-    OneSignalDeferred.push(function(OneSignal) {
-      OneSignal.init({
-        appId: "7de829f2-e9a4-4f86-ac87-30c8da2b0e17", // tu App ID
+
+    OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({
+        appId: "7de829f2-e9a4-4f86-ac87-30c8da2b0e17",
       });
     });
 
