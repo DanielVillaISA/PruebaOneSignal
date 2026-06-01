@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba OneSignal</title>
+</head>
+<body style="font-family: Arial; text-align:center; margin-top: 50px;">
+
+    <h1>🔔 Prueba de Notificaciones</h1>
+    <p>Haz clic abajo para activar notificaciones</p>
+
+    <button onclick="suscribirse()" style="padding:10px 20px; font-size:16px;">
+        Activar notificaciones
+    </button>
+
+    <!-- OneSignal SDK -->
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+
+    <script>
+    window.OneSignal = window.OneSignal || [];
+
+    OneSignal.push(function() {
+      OneSignal.init({
+        appId: "TU-APP-ID",
+        notifyButton: {
+          enable: true,
+        },
+      });
+    });
+
+    function suscribirse() {
+      OneSignal.push(function() {
+        OneSignal.showNativePrompt();
+      });
+    }
+    </script>
+
+</body>
+</html>
