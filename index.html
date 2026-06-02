@@ -7,29 +7,52 @@
 
 <body style="font-family: Arial; text-align:center; margin-top: 50px;">
 
-  <h1> Prueba de Notificaciones</h1>
+  <h1>🔔 Prueba de Notificaciones</h1>
+
+  <!-- BOTÓN PRINCIPAL -->
   <button onclick="suscribirse()" style="padding:10px 20px; font-size:16px;">
     Activar notificaciones
   </button>
 
-  <!-- SCRIPT CORRECTO -->
+  <br><br>
+
+  <!-- BOTÓN DE PRUEBA -->
+  <button onclick="prueba()" style="padding:10px 20px; font-size:16px;">
+    Probar botón
+  </button>
+
+  <!-- SCRIPT ONE SIGNAL (CORRECTO ✅) -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"></script>
 
   <script>
+    console.log("✅ Página cargada correctamente");
+
+    // Inicializar OneSignal
     window.OneSignalDeferred = window.OneSignalDeferred || [];
 
     OneSignalDeferred.push(async function(OneSignal) {
+      console.log("✅ OneSignal cargado");
+      
       await OneSignal.init({
-        appId: "7de829f2-e9a4-4f86-ac87-30c8da2b0e17",
+        appId: "7de829f2-e9a4-4f86-ac87-30c8da2b0e17"
       });
+
+      console.log("✅ OneSignal inicializado");
     });
 
-    function suscribirse() {
-      OneSignalDeferred.push(function(OneSignal) {
-        OneSignal.showNativePrompt();
-      });
+    // Botón de prueba (solo para verificar JS)
+    function prueba() {
+      alert("✅ El botón funciona correctamente");
+      console.log("✅ Botón de prueba ejecutado");
     }
-  </script>
 
-</body>
-</html>
+    // Botón real de suscripción
+    function suscribirse() {
+      console.log("👉 Click en botón de notificaciones");
+
+      if (!window.OneSignalDeferred) {
+        alert("❌ OneSignal no está cargado");
+        return;
+      }
+
+      OneSignalDeferred.push(function(OneSignal) {
