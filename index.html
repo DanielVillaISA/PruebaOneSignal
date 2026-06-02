@@ -5,54 +5,62 @@
   <title>Prueba OneSignal</title>
 </head>
 
-<body style="font-family: Arial; text-align:center; margin-top: 50px;">
+<body style="font-family: Arial; text-align:center; margin-top: 60px;">
 
-  <h1>🔔 Prueba de Notificaciones</h1>
+  <h1>🔔 Prueba OneSignal</h1>
 
-  <!-- BOTÓN PRINCIPAL -->
-  <button onclick="suscribirse()" style="padding:10px 20px; font-size:16px;">
+  <p>Haz clic para activar notificaciones</p>
+
+  <!-- BOTÓN -->
+  <button onclick="activarNotificaciones()" 
+    style="padding:15px 25px; font-size:16px; cursor:pointer;">
     Activar notificaciones
   </button>
 
   <br><br>
 
   <!-- BOTÓN DE PRUEBA -->
-  <button onclick="prueba()" style="padding:10px 20px; font-size:16px;">
-    Probar botón
+  <button onclick="probarJS()" 
+    style="padding:10px 20px; font-size:14px;">
+    Probar botón JS
   </button>
 
-  <!-- SCRIPT ONE SIGNAL (CORRECTO ✅) -->
+  <!-- ✅ SCRIPT CORRECTO -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"></script>
 
   <script>
-    console.log("✅ Página cargada correctamente");
+    console.log("✅ Página cargada");
 
-    // Inicializar OneSignal
     window.OneSignalDeferred = window.OneSignalDeferred || [];
 
     OneSignalDeferred.push(async function(OneSignal) {
       console.log("✅ OneSignal cargado");
-      
+
       await OneSignal.init({
-        appId: "7de829f2-e9a4-4f86-ac87-30c8da2b0e17"
+        appId: "7de829f2-e9a4-4f86-ac87-30c8da2b0e17", // TU APP ID
+        notifyButton: {
+          enable: true
+        }
       });
 
       console.log("✅ OneSignal inicializado");
     });
 
-    // Botón de prueba (solo para verificar JS)
-    function prueba() {
-      alert("✅ El botón funciona correctamente");
-      console.log("✅ Botón de prueba ejecutado");
+    // 🔔 Botón principal
+    function activarNotificaciones() {
+      console.log("👉 Click en activar");
+
+      OneSignalDeferred.push(function(OneSignal) {
+        OneSignal.showNativePrompt();
+      });
     }
 
-    // Botón real de suscripción
-    function suscribirse() {
-      console.log("👉 Click en botón de notificaciones");
+    // 🧪 Botón de prueba
+    function probarJS() {
+      alert("✅ JavaScript funciona");
+    }
+  </script>
 
-      if (!window.OneSignalDeferred) {
-        alert("❌ OneSignal no está cargado");
-        return;
-      }
-
+</body>
+</html>
       OneSignalDeferred.push(function(OneSignal) {
